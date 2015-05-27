@@ -276,7 +276,7 @@ if False: #q14
     niter = 50000
     r = 0.1
 
-    NEXP = 20    
+    NEXP = 500    
             
     Eins = []
     Eouts = []
@@ -309,9 +309,8 @@ if False: #q14
         print "nexp", nexp, "Ein", Ein, "Eout", Eout
 
         # print out the average Eout up to now
-        print "avgEin", sum(Eins)/float(len(Eins)), \
-            "avgEout", sum(Eouts)/float(len(Eouts)), \
-            "size", len(Eins)
+        print "size", len(Eins), "avgEout", sum(Eouts)/float(len(Eouts))
+            
                 
         sys.stdout.flush()
  
