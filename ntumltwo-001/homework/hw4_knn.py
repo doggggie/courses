@@ -1,24 +1,6 @@
 import numpy as np
-import sys
-
-# d-M-1 NN w tanh type neurons (including the output neuron)
-# use Squred error measure
 
 DEBUG_PRT = False
-
-def tanh(x):
-    return 2.0 / (1.0 + np.exp(-2.0 * x)) - 1
-    
-def dtanh(x):
-    y = tanh(x)
-    return 1 - y * y
-
-def activate_func(x):
-    return tanh(x)
-    
-def activate_func_deriv(x):
-    return dtanh(x)
-        
 
 class KNearestNeighbor(object):
     
@@ -41,21 +23,16 @@ class KNearestNeighbor(object):
         
 
         for i in range(m):
-            dists[i] = np.norm(self.X[i,:] - X, 2)
+            dists[i] = np.linalg.norm(self.X[i,:] - X, 2)
+        
+        if self.k == 1:
+            ind = np.argmin(dists)
+            return y[ind]
+        else:     
+            inds = np.argsort(dists)[:self.k]
+            return np.sign(sum(y[inds]))
             
-                    
-            
-        x = np.concatenate((np.ones(1.0), X))
-        for il in range(1, self.nl+1):
-            s = np.dot(np.transpose(self.w[il]), x)
-            if il < self.nl:
-                # non-output layer
-                x = np.concatenate((np.ones(1.0), activate_func(s)))
-            else:
-                # output layer
-                x = activate_func(s)
-                
-        return x
+
 
     def compute_err(self, X, y):
         m, n = np.shape(X)
@@ -63,25 +40,18 @@ class KNearestNeighbor(object):
         err = 0.0
         for i in range(m):
             ypredict = self.predict(X[i,:])
-            err += (ypredict - y[i]) ** 2
+            if ypredict != y[i]:
+                err += 1
         err /= float(m)
         return err
     
-Eins = {}
-Eouts = {}
-
-q15 = True    
-q16 = False
-q17 = False    
 
 #print(chr(27)+"[2J")
-
+q15 = True
 
 if q15:
     
-    np.random.seed(0)
-    
-    trainfn = 'hw4_nnet_train.dat'
+    trainfn = 'hw4_knn_train.dat'
     traindata = np.loadtxt(trainfn)    
     
     m, n = np.shape(traindata)    
@@ -89,48 +59,20 @@ if q15:
     X = traindata[:, 0:n]    
     y = traindata[:, n]
     
-    lrate = 0.01
-    niter = 50000
-    r = 0.1
+    k = 5
 
-    NEXP = 20    
+    knn = KNearestNeighbor(k)
+    knn.train(X, y)
+        
+    Ein = knn.compute_err(X, y)
+        
+    testfn = 'hw4_knn_test.dat'
+    testdata = np.loadtxt(testfn)    
+    m, n = np.shape(testdata)    
+    n = n - 1
+    Xtest = testdata[:, 0:n]    
+    ytest = testdata[:, n]
+    Eout = knn.compute_err(Xtest, ytest)
             
-    Eins = []
-    Eouts = []
-        
-    for nexp in range(NEXP):
-    
-        wt_bds = (-r, r)
-        nlayers = 3
-        layers = {0:n, 1:8, 2:3, 3:1}
-        
-        nn = NeuralNetwork(nlayers, layers)
-        nn.set_learning_rate(lrate)
-        nn.set_num_iterations(niter)
-        nn.set_weight_bounds(wt_bds)
-        nn.train(X, y)
-        
-        Ein = nn.compute_err(X, y)
-        
-        testfn = 'hw4_nnet_test.dat'
-        testdata = np.loadtxt(testfn)    
-        m, n = np.shape(testdata)    
-        n = n - 1
-        Xtest = testdata[:, 0:n]    
-        ytest = testdata[:, n]
-        Eout = nn.compute_err(Xtest, ytest)
+    print "Ein", Ein, "Eout", Eout
 
-        Eins.append(Ein)
-        Eouts.append(Eout)
-            
-        print "nexp", nexp, "Ein", Ein, "Eout", Eout
-
-        # print out the average Eout up to now
-        print "avgEin", sum(Eins)/float(len(Eins)), \
-            "avgEout", sum(Eouts)/float(len(Eouts)), \
-            "size", len(Eins)
-                
-        sys.stdout.flush()
- 
-        print "\n"
-       
