@@ -1,8 +1,22 @@
 ## My TODO List
 
-* l1
-* 
-* 
+* **Pomodoro** - focus on the process; discomfort will disappear not long after you start working. 
+* Learn a little every time, and **space the repitition **out -> long-term memory.
+* Write down weekly **plan** and daily ones before sleep, and try to work on the most important and disliked ones first. 
+* Two-sided **index cards** - take them out several times a day and before bed. 
+* A picture walk (of the **big picture first**, then fill in details later) is good for learning new things. 
+* **Interleaving** between different subjects makes interesting connections between chunks in different fields, which will further enhance your creativity. 
+*
+* Tackling **procrastination**: have a **plan** to stay away from zombie mode (no phone, no internet connection, quiet space, noise cancelling headphone...) and **reward** good habits. 
+* Going over things **before sleep** helps you to understand. 
+* **Recalling** (e.g. mental retrieval of key ideas) and **testing yourself** rather than passive rereading is more effective. 
+* Deliberately focus on what you find more **difficult**. 
+* Use your **senses** - visual, smell, hearing, taste, and imagination (memory palace). 
+* Only doing things **yourself** rather than watch someone else helps you to learn.
+* Minimum highlighting - at most one line per paragraph.  
+* To get into diffuse mode, relax / **exercise**, but plan a way to get out of that and record ideas generated. 
+* Use metaphor and analogy to learn new things. 
+* New synapses are formed after learning and sleep.
 
 
 -------------------------
