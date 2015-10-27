@@ -44,8 +44,7 @@ def pla(tbl, perm=False, lrate=1.0):
     return (totcount, wt)
 
 def hw1p15():
-#    fn = 'C:\\Users\\Administrator\\Desktop\\gg\\ntumlone\\hw1_15_train.dat'
-    fn = 'C:\\shanying\\mooc\\ntumlone-002\\ntumlone_hw1_hw1_15_train.dat'
+    fn = 'ntumlone_hw1_hw1_15_train.dat'
     datatbl = np.loadtxt(fn)
     
     # Q15

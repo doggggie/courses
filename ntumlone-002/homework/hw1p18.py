@@ -63,11 +63,10 @@ def errtest(tbl, wt):
     
 
 def hw1p18():
-#    fn = 'C:\\Users\\Administrator\\Desktop\\gg\\ntumlone\\hw1_15_train.dat'
-    datafn = 'C:\\shanying\\mooc\\ntumlone-002\\ntumlone_hw1_hw1_18_train.dat'
+    datafn = 'ntumlone_hw1_hw1_18_train.dat'
     datatbl = np.loadtxt(datafn)
     
-    testfn = 'C:\\shanying\\mooc\\ntumlone-002\\ntumlone_hw1_hw1_18_test.dat'
+    testfn = 'ntumlone_hw1_hw1_18_test.dat'
     testtbl = np.loadtxt(testfn)
     
     np.random.seed(0)
@@ -75,7 +74,7 @@ def hw1p18():
     # Q18
     niter = 50
     sumerr = 0.0
-    ntest = 0
+    ntest = 0 # 50 or 2000
     for i in range(ntest):
         print i, "       ",
         ct, wbest, wt, ndiff = pocketpla(datatbl, niter=niter)
@@ -86,23 +85,23 @@ def hw1p18():
     # Q19
     niter = 50
     sumerr = 0.0
-    ntest = 0
+    ntest = 0 #2000
     for i in range(ntest):
         print i, "       ",
         ct, wbest, wt, ndiff = pocketpla(datatbl, niter=niter)
         err = errtest(testtbl, wt)
         sumerr += err
-#    print "Q19\nerr", sumerr / float(ntest)
+    #print "Q19\nerr", sumerr / float(ntest)
     
     # Q20
     niter = 100
     sumerr = 0.0
-    ntest = 50
+    ntest = 0 # 50 or 2000
     for i in range(ntest):
         print i, "       ",
         ct, wbest, wt, ndiff = pocketpla(datatbl, niter=niter)
         err = errtest(testtbl, wbest)
         sumerr += err
-    print "Q20\nerr", sumerr / float(ntest)
+    #print "Q20\nerr", sumerr / float(ntest)
 
 hw1p18()

@@ -102,7 +102,7 @@ def calEtest_nd(x, y, N, s, theta, dimidx):
 
 def q19():
 #    fn = 'C:\\Users\\Administrator\\Desktop\\gg\\ntumlone\\hw1_15_train.dat'
-    trainfn = 'C:\\shanying\\mooc\\ntumlone-002\\ntumlone_hw2_hw2_train.dat'
+    trainfn = 'ntumlone_hw2_hw2_train.dat'
     traindata = np.loadtxt(trainfn)
     m, n = np.shape(traindata)
     y = traindata[:, n-1]
@@ -110,9 +110,9 @@ def q19():
     N = m
     d = n-1
     s, theta, Ein, dim = solve_ds_nd(x, y, N, d)
-    print s, theta, Ein, dim
+    print 'Ein', Ein, 's', s, 'theta', theta, 'dim', dim
     
-    testfn = 'C:\\shanying\\mooc\\ntumlone-002\\ntumlone_hw2_hw2_test.dat'
+    testfn = 'ntumlone_hw2_hw2_test.dat'
     testdata = np.loadtxt(testfn)
     m, n = np.shape(testdata)
     y = testdata[:, n-1]
