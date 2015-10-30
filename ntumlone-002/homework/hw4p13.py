@@ -30,7 +30,7 @@ def hw4q13(reg=10.0):
     
 
     Ein = np.mean(np.sign(np.dot(X, w)) != y)
-    print Ein
+    print "Ein", Ein
     
     testdata = np.loadtxt(testfn)
     
@@ -44,7 +44,7 @@ def hw4q13(reg=10.0):
     y = testdata[:, n]
     
     Eout = np.mean(np.sign(np.dot(X, w)) != y)
-    print Eout
+    print "Eout", Eout
     
     return
 
@@ -55,16 +55,12 @@ def hw4q14():
     testfn = 'ntumlone_hw4_hw4_test.dat'
     trainfn = 'ntumlone_hw4_hw4_train.dat'
     
-    
     minEin = 10
     minEout = 10
     minreg = 5
     
-
-    
-    
     for logreg in range(2, -11, -1):
-        reg = 10 ** logreg
+        reg = 10.0 ** logreg
     
         traindata = np.loadtxt(trainfn)
     
@@ -78,13 +74,11 @@ def hw4q14():
 
     #print w
     
-
         Ein = np.mean(np.sign(np.dot(X, w)) != y)
     
         testdata = np.loadtxt(testfn)
     
-        m, n = np.shape(testdata)
-    
+        m, n = np.shape(testdata)    
         n = n - 1
         X = testdata[:, 0:n]
     
@@ -95,7 +89,8 @@ def hw4q14():
         Eout = np.mean(np.sign(np.dot(X, w)) != y)
         print reg, Ein, Eout
     
-        if Eout < minEout:
+#        if Ein < minEin:  # Q14
+        if Eout < minEout:  # Q15
             minEin = Ein
             minreg = reg
             minEout = Eout
@@ -112,15 +107,12 @@ def hw4q16():
     testfn = 'ntumlone_hw4_hw4_test.dat'
     trainfn = 'ntumlone_hw4_hw4_train.dat'
     
-    
     minEin = 10
     minEout = 10
     minEcv = 10
     minreg = 5
     
 
-    
-    
     for logreg in range(2, -11, -1):
         reg = 10 ** logreg
     
@@ -132,24 +124,18 @@ def hw4q16():
         m, _ = np.shape(X)
         X = np.concatenate((np.ones((m, 1)), X), axis=1)
         y = traindata[0:120, n]
-
-
-    
             
         w = linregr_reg(X, y, reg)
 
     #print w
-    
 
         Ein = np.mean(np.sign(np.dot(X, w)) != y)
-    
     
         Xcv = traindata[120:, 0:n]
         m, _ = np.shape(Xcv)
         Xcv = np.concatenate((np.ones((m, 1)), Xcv), axis=1)
         ycv = traindata[120:, n]
         Ecv = np.mean(np.sign(np.dot(Xcv, w)) != ycv)
-    
     
         testdata = np.loadtxt(testfn)
     
@@ -165,7 +151,8 @@ def hw4q16():
         Eout = np.mean(np.sign(np.dot(X, w)) != y)
         print reg, Ein, Ecv, Eout
     
-        if Ecv < minEcv:
+#        if Ein < minEin:  # Q16
+        if Ecv < minEcv:  # Q17
             minEin = Ein
             minreg = reg
             minEout = Eout
@@ -185,7 +172,6 @@ def hw4q19():
     
     n = np.shape(traindata)[1]  
     n = n - 1
-        
 
     minEcv = 10
     minreg = 5
@@ -193,12 +179,9 @@ def hw4q19():
     for logreg in range(2, -11, -1):
         reg = 10 ** logreg
     
-    
         Ecv = 0.0
         for ifold in range(5):
     
-
-            
             X = np.concatenate((traindata[0 : ifold * 40, 0:n],\
                                 traindata[(ifold + 1) * 40 :, 0:n]),\
                                axis=0)
